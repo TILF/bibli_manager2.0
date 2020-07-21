@@ -59,7 +59,7 @@
             \Form::addParams('reference', $reference,  \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             if(\Form::param('reference') !== \Form::EMPTY_STRING){
                  \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                    ->data('BBNageur\\livres')->deleteBook(\Form::param('reference'), date('Ymd'));               
+                    ->data('BBnageur\\livres')->deleteBook(\Form::param('reference'), date('Ymd'));               
                 \Form::addConfirmation('Suppression réalisé avec succès');
                 \Form::displayResult(\Application::getRoute('livre', 'index'));
             }else{
@@ -102,7 +102,7 @@
             \Form::addParams('reference', $_POST,  \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             if(trim(\Form::param('reference')) !== \Form::EMPTY_STRING){
                 $datas = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                    ->data('BBNageur\\livres')->getBookInfoByRef(\Form::param('reference'));       
+                    ->data('BBnageur\\livres')->getBookInfoByRef(\Form::param('reference'));       
                 $final=array();
                 $final['Reference'] = \Db::decode($datas['Reference']);
                 $final['Titre'] =  \Db::decode($datas['Titre']);

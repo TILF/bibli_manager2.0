@@ -34,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item  <?php echo \Application::getModule() === 'index' ? 'active' : ''; ?>">
-                                <a class="nav-link" href="<?php echo \Application::getRoute('index', 'index'); ?>"><i class="fas fa-home"></i> Acceuil</a>
+                                <a class="nav-link" href="<?php echo \Application::getRoute('index', 'index'); ?>"><i class="fas fa-home"></i> Accueil</a>
                         </li>
                         <li class="nav-item <?php echo \Application::getModule() === 'livre' ? 'active' : ''; ?>">
                                 <a class="nav-link" href="<?php echo \Application::getRoute('livre', 'index'); ?>"><i class="fas fa-book"></i> Gestion des Livres</a>
