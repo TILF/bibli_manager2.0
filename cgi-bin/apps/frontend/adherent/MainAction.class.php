@@ -7,11 +7,11 @@
         public static function execute()
         {
             \Form::retrieveErrorsAndParams();
-            \Page::set('title', 'Gestion des Adhérents');
+            \Page::set('title', 'Gestion des Adhérents');  
 
             $allAdherents = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                        ->data('BBNageur\\adherents')-> getallAdherents();
-
+                    ->data('BBNageur\\adherents')->getAllAdherents();
+            
             \Page::set('allAdherents', $allAdherents);
             \Page::display();
         }
@@ -93,7 +93,7 @@
             \Form::addParams('telephone', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             \Form::addParams('cotisation', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('ville', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('zipcode' $_POST, \Form::TYPE_INT, 0 , \Form::SIGNED_INT_32_MAX);
+            \Form::addParams('zipcode', $_POST, \Form::TYPE_INT, 0 , \Form::SIGNED_INT_32_MAX);
             
             if( trim(\Form::param('nom')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('prenom')) === \Form::EMPTY_STRING || 
@@ -101,7 +101,7 @@
                 trim(\Form::param('adresse')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('telephone')) === \Form::EMPTY_INT || 
                 trim(\Form::param('cotisation')) === \Form::EMPTY_STRING ||
-                trim(\Form::param('ville')) === \Form::EMPTY_STRING)
+                trim(\Form::param('ville')) === \Form::EMPTY_STRING ||
                 trim(\Form::param('zipcode')) === \Form::EMPTY_INT) {
                 \Form::addError('Erreur Critique', 'Une erreur critique est survenue, merci de contacter votre administrateur');
             }

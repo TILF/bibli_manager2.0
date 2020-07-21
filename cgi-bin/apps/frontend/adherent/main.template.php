@@ -41,7 +41,7 @@
 			<tr>
 				<td><?php echo \Db::decode($Adherents['Nom']); ?></td>
 				<td><?php echo \Db::decode($Adherents['Prenom']);?></td>
-				<td><?php echo \Db::decode($Adherents['Date_naissance']);?></td>
+				<td><?php echo \Db::decode($Adherents['Age']);?></td>
 				<td><?php echo \Db::decode($Adherents['Adresse']);?></td>
 				<td><?php echo \Db::decode($Adherents['Telephone']);?></td>
 				<td><?php echo \Db::decode($Adherents['Cotisation']);?></td>
@@ -51,14 +51,16 @@
 					<button class="btn btn-dark ModifyAdherentButton"
 							data-toggle ="modal"
 							data-target ="#addAdherentsModale"
-							data-ref ="<?php echo Application::getRoute('adherent', 'modifyAdherents', array($Adherents['Id']));?>">	
+							data-ref ="<?php echo Application::getRoute('adherent', 'modifyAdherents', array($Adherents['Id']));?>">
+                                            <i class="far fa-edit"></i>
 					</button>
 				</td>
 				<td class="center">
 					<button class="btn btn-danger SupprAdherent"
 							data-toggle ="modal"
 							data-target ="#deleteAdherentsModale"
-							data-ref ="<?php echo \Application::getRoute('adherent', 'deleteAdherents', array($Adherents['Id]'])) ?>">
+							data-ref ="<?php echo \Application::getRoute('adherent', 'deleteAdherents', array($Adherents['Id'])) ?>">
+                                        <i class="far fa-trash-alt"></i>
 					</button>
 				</td>
 			</tr>
