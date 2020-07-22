@@ -15,46 +15,43 @@
         }
 
         // Function d'ajout d'adhérents dans la table
-        public function addAdherents($nom, $prenom ,$date_naissance, $adresse, $tel, $cotisation, $dateFin, $ville, $zipcode)
+        public function addAdherents($nom, $prenom ,$age, $adresse, $tel, $cotisation, $ville, $zipcode)
         {
             $statement=$this->db->prepare(
-                    'INSERT INTO adherents(Nom, Prenom, Age, Adresse, Telephone, Cotisation, dateFin, Ville, CP)
-                    VALUES(:nom, :prenom, :date_naissance, :adresse, :tel, :cotisation, :dateFin, :ville, :zipcode)');
+                    'INSERT INTO adherents(Nom, Prenom, Age, Adresse, Telephone, Cotisation, Ville, CP)
+                    VALUES(:nom, :prenom, :age, :adresse, :tel, :cotisation, :ville, :zipcode)');
             $statement->bindParam(':nom', $nom, \PDO::PARAM_STR);
             $statement->bindParam(':prenom', $prenom, \PDO::PARAM_STR);
-            $statement->bindParam(':date_naissance', $date_naissance, \PDO::PARAM_INT);
+            $statement->bindParam(':age', $age, \PDO::PARAM_INT);
             $statement->bindParam(':adresse', $adresse, \PDO::PARAM_STR);
-            $statement->bindParam(':tel', $tel, \PDO::PARAM_INT);
+            $statement->bindParam(':tel', $tel, \PDO::PARAM_STR);
             $statement->bindParam(':cotisation', $cotisation, \PDO::PARAM_STR);
-            $statement->bindParam(':dateFin', $dateFin, \PDO::PARAM_INT);
             $statement->bindParam(':ville', $ville, \PDO::PARAM_STR);
             $statement->bindParam(':zipcode', $zipcode, \PDO::PARAM_INT);
             $statement->execute();
         }
 
         // Function de  modification des adhérents
-        public function modifyAdherents($id, $nom, $prenom ,$date_naissance, $adresse, $tel, $cotisation, $dateFin, $ville, $zipcode)
+        public function modifyAdherents($id, $nom, $prenom ,$age, $adresse, $tel, $cotisation, $ville, $zipcode)
         {
             $statement = $this->db->prepare(
                     'UPDATE adherents
                     SET Id = :id,
                             Nom = nom,
                             Prenom = :prenom,
-                            Age = :date_naissance,
+                            Age = :age,
                             Adresse = :adresse,
                             Telephone = :tel,
                             Cotisation = :cotisation,
-                            dateFin = :dateFin,
                             Ville = :ville,
                             CP = :zipcode
                     WHERE Id = :id');
             $statement->bindParam(':nom', $nom, \PDO::PARAM_STR);
             $statement->bindParam(':prenom', $prenom, \PDO::PARAM_STR);
-            $statement->bindParam(':date_naissance', $date_naissance, \PDO::PARAM_INT);
+            $statement->bindParam(':age', $age, \PDO::PARAM_INT);
             $statement->bindParam(':adresse', $adresse, \PDO::PARAM_STR);
-            $statement->bindParam(':tel', $tel, \PDO::PARAM_INT);
+            $statement->bindParam(':tel', $tel, \PDO::PARAM_STR);
             $statement->bindParam(':cotisation', $cotisation, \PDO::PARAM_STR);
-            $statement->bindParam(':dateFin', $dateFin, \PDO::PARAM_INT);
             $statement->bindParam(':ville', $ville, \PDO::PARAM_STR);
             $statement->bindParam(':zipcode', $zipcode, \PDO::PARAM_INT);
             $statement->execute();

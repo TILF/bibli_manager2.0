@@ -9,7 +9,7 @@
 	<!---------------Corps------------------->
 	<div class="row">
 		<div class="col-12 btn-left-bloc">
-			<button class="btn button AddExtend" data-toggle="modal" data-target ="#addAdherentsModale"
+			<button class="btn buttonAddExtend" data-toggle="modal" data-target ="#addAdherentsModale"
 			data-ref ="<?php echo \Application::getRoute('adherent' , 'addAdherents')?>">
 				<span class="circle">
                     <span class="icon arrow"></span>
@@ -51,8 +51,10 @@
 					<button class="btn btn-dark ModifyAdherentButton"
 							data-toggle ="modal"
 							data-target ="#addAdherentsModale"
-							data-ref ="<?php echo Application::getRoute('adherent', 'modifyAdherents', array($Adherents['Id']));?>">
-                                            <i class="far fa-edit"></i>
+							data-ref ="<?php echo Application::getRoute('adherent', 'modifyAdherents', array($Adherents['Id']));?>"
+                            data-ref-ajax = "<?php echo \Application::getRoute('adherent', 'getAdherentsbyId');?>"
+                            data-id ="<?php echo $Adherents['Id'];?>"><i class="far fa-edit"></i>
+                            
 					</button>
 				</td>
 				<td class="center">
@@ -95,11 +97,11 @@
                 </div>
                 <div class="form-group">
                     <label>Adresse</label>
-                    <input class="form-control verifyText" data-min="10" data-max="9999" data-name="Adresse" name="annee" id="adresse" type="text">
+                    <input class="form-control verifyText" data-min="10" data-max="9999" data-name="Adresse" name="adresse" id="adresse" type="text">
                 </div>
                 <div class="form-group">
                     <label>Téléphone</label>
-                    <input class="form-control verifyInt" data-name="Telephone" name="tel" id="telephone" type="number">
+                    <input class="form-control verifyText" data-name="Telephone" name="tel" id="telephone" type="text">
                 </div>
                 <div class="form-group">
                     <label>Cotisation</label>
@@ -110,7 +112,7 @@
                     <input class="form-control verifyText" data-name="Ville" name="ville" id="ville" type="text">
                 </div>
                 <div class="form-group">
-                    <label>Cotisation</label>
+                    <label>Code postal</label>
                     <input class="form-control verifyText" data-name="CP" name="zipcode" id="zipcode" type="number">
                 </div> 
             </div>
@@ -124,7 +126,7 @@
 </form>
 
 <form id="formModalDelete" action="" method="POST">
-    <div class="modal fade" id="deleteAdherents" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="deleteAdherentsModale" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,10 +150,51 @@
 
 <script>
 
+    var table =  $('#AdherentsTable').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        pageLength: 25,
+        lengthChange: false,
+        buttons: [ {extend: 'excel', text: '<i class="fas fa-download"></i> Excel', className: 'btn btn-info'} ]
+    });
+
+    $('.buttonAddExtend').click(function(){
+        $('#ModalTitile').html('Ajout d\'un adhérent');
+        $('#formModalAdd').attr('action', $(this).attr('data-ref'));
+        $('#btnActionModal').html('Ajouter');
+        form_reset();
+    });
+
 	$('.ModifyAdherentButton').click(function(){
         $('#ModalTitile').html('Modification d\'un adhérent');
         $('#formModalAdd').attr('action', $(this).attr('data-ref'));  
         $('#btnActionModal').html('Modifier');
     });
+
+    $('.SupprAdherent').click(function(){
+        $('#formModalDelete').attr('action', $(this).attr('data-ref'));
+    });
+
+    $.ajax({
+        url: $(this).attr('data-ref-ajax'),
+        type: 'post',
+        dataType: 'JSON',
+        data: {id: $(this).attr('data-id')},
+        success: function(result) {
+            if (result.id) {
+                $('nom').val(result.Nom);
+                $('prenom').val(result.Prenom);
+                $('age').val(result.Age);
+                $('adresse').val(result.Adresse);
+                $('tel').val(result.Telephone);
+                $('cotisation').val(result.Cotisation);
+                $('ville').val(result.Ville);
+                $('zipcode').val(result.CP);
+            }else{
+                $.notify("Une erreur est survenue, contactez votre administrateur", 'error');
+                    console.log('Erreur de AJAX');
+            }
+        }
+    })
 
 </script>

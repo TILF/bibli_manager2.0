@@ -26,16 +26,16 @@
 
             if (\Form::isValid()) {
 
-                \Application::getDb(config\Configuration::get('bbnageur_dsn', 'databases'))
+                \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                     ->data('BBNageur\\adherents')->addAdherents(
-                        \Form::Param('Nom'),
-                        \Form::Param('Prenom'),
-                        \Form::Param('Age'),
-                        \Form::Param('Adresse'),
-                        \Form::Param('Telephone'),
-                        \Form::Param('Cotisation'),
-                        \Form::Param('Ville'),
-                        \Form::Param('CP'));
+                        \Form::Param('nom'),
+                        \Form::Param('prenom'),
+                        \Form::Param('age'),
+                        \Form::Param('adresse'),
+                        \Form::Param('tel'),
+                        \Form::Param('cotisation'),
+                        \Form::Param('ville'),
+                        \Form::Param('zipcode'));
                 \Form::addConfirmation('Ajout réalisé avec succès!');
                 \Form::displayResult(\Application::getRoute('adherent', 'index'));
             }else{
@@ -49,7 +49,7 @@
 
             if (\Form::isValid()) {
 
-               \Application::getDb(config\Configuration::get('bbnageur_dsn' , 'databases'))
+               \Application::getDb(\config\Configuration::get('bbnageur_dsn' , 'databases'))
                 ->data('BBNageur\\adherents')->modifyAdherents($id,
                         \Form::Param('Nom'),
                         \Form::Param('Prenom'),
@@ -60,7 +60,7 @@
                         \Form::Param('Ville'),
                         \Form::Param('CP'));
                 \Form::addConfirmation('Modification réalisée avec succès!');
-                \Form::displayResult(\Application::getRoute('adherent' , 'indext'));
+                \Form::displayResult(\Application::getRoute('adherent' , 'index'));
             }else{
                 \Form::displayErrors(\Application::getRoute('adherent' , 'index'));
             }
@@ -70,7 +70,7 @@
 
             \Form::addParams('id', $id, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             if (\Form::param('id') !== \Form::EMPTY_STRING) {
-                \Application::getDb(config\Configuration::get('bbnageur_dsn', 'databases'))
+                \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                     ->data('BBNageur\\adherents')->deleteAdherents(\Form::param('id'));
                 \Form::addConfirmation('Suppression réalisée avec succès!');
                 \Form::displayResult(\Application::getRoute('adherent', 'index'));
@@ -90,19 +90,19 @@
             \Form::addParams('prenom', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('age', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             \Form::addParams('adresse', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('telephone', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
+            \Form::addParams('tel', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('cotisation', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('ville', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('zipcode', $_POST, \Form::TYPE_INT, 0 , \Form::SIGNED_INT_32_MAX);
             
             if( trim(\Form::param('nom')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('prenom')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('age')) === \Form::EMPTY_INT ||
+                trim(\Form::param('age')) === \Form::EMPTY_STRING ||
                 trim(\Form::param('adresse')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('telephone')) === \Form::EMPTY_INT || 
+                trim(\Form::param('tel')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('cotisation')) === \Form::EMPTY_STRING ||
                 trim(\Form::param('ville')) === \Form::EMPTY_STRING ||
-                trim(\Form::param('zipcode')) === \Form::EMPTY_INT) {
+                trim(\Form::param('zipcode')) === \Form::EMPTY_STRING) {
                 \Form::addError('Erreur Critique', 'Une erreur critique est survenue, merci de contacter votre administrateur');
             }
             

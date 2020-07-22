@@ -17,8 +17,20 @@ div.dt-buttons{
     border-top-right-radius: 0;
 }
 
+.container{
+    background-color: 
+}
+
 .jumbnoLivre{
     background-image: url("../images/jumbolivres.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+}
+
+.jumboAdherents{
+    background-image: url("../images/prout.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
