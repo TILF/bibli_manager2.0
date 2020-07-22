@@ -14,11 +14,11 @@
                         'controller' => 'MainAction::addAdherents'
                 ),
                 'modifyAdherents' => array(
-                        'pattern' => 'modifyAdherents{id}',
+                        'pattern' => 'modifyAdherents-{id}',
                         'controller' => 'MainAction::modifyAdherents'
                 ),
                 'deleteAdherents' => array(
-                        'pattern' => 'deleteAdherents{id}',
+                        'pattern' => 'deleteAdherents-{id}',
                         'controller' => 'MainAction::deleteAdherents'
                 ),
                 'getAdherentsbyId' => array(

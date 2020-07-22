@@ -51,14 +51,14 @@
 
                \Application::getDb(\config\Configuration::get('bbnageur_dsn' , 'databases'))
                 ->data('BBNageur\\adherents')->modifyAdherents($id,
-                        \Db::encode(\Form::Param('Nom')),
-                        \Db::encode(\Form::Param('Prenom')),
-                        \Form::Param('Age'),
-                        \Db::encode(\Form::Param('Adresse')),
-                        \Form::Param('Telephone'),
-                        \Db::encode(\Form::Param('Cotisation')),
-                        \Db::encode(\Form::Param('Ville')),
-                        \Form::Param('CP'));
+                        \Db::encode(\Form::Param('nom')),
+                        \Db::encode(\Form::Param('prenom')),
+                        \Form::Param('age'),
+                        \Db::encode(\Form::Param('adresse')),
+                        \Form::Param('tel'),
+                        \Db::encode(\Form::Param('cotisation')),
+                        \Db::encode(\Form::Param('ville')),
+                        \Form::Param('zipcode'));
                 \Form::addConfirmation('Modification réalisée avec succès!');
                 \Form::displayResult(\Application::getRoute('adherent' , 'index'));
             }else{

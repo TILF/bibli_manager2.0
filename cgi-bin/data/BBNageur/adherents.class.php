@@ -35,17 +35,17 @@
         public function modifyAdherents($id, $nom, $prenom ,$age, $adresse, $tel, $cotisation, $ville, $zipcode)
         {
             $statement = $this->db->prepare(
-                    'UPDATE adherents
-                    SET Id = :id,
-                            Nom = nom,
-                            Prenom = :prenom,
-                            Age = :age,
-                            Adresse = :adresse,
-                            Telephone = :tel,
-                            Cotisation = :cotisation,
-                            Ville = :ville,
-                            CP = :zipcode
-                    WHERE Id = :id');
+                    "UPDATE adherents
+                    SET
+                        Nom = :nom,
+                        Prenom = :prenom,
+                        Age = :age,
+                        Adresse = :adresse,
+                        Telephone = :tel,
+                        Cotisation = :cotisation,
+                        Ville = :ville,
+                        CP = :zipcode
+                    WHERE Id = :id");
             $statement->bindParam(':nom', $nom, \PDO::PARAM_STR);
             $statement->bindParam(':prenom', $prenom, \PDO::PARAM_STR);
             $statement->bindParam(':age', $age, \PDO::PARAM_INT);
@@ -54,6 +54,7 @@
             $statement->bindParam(':cotisation', $cotisation, \PDO::PARAM_STR);
             $statement->bindParam(':ville', $ville, \PDO::PARAM_STR);
             $statement->bindParam(':zipcode', $zipcode, \PDO::PARAM_INT);
+            $statement->bindParam(':id', $id, \PDO::PARAM_INT);
             $statement->execute();
         }
 
