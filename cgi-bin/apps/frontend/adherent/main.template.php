@@ -165,36 +165,38 @@
         form_reset();
     });
 
-	$('.ModifyAdherentButton').click(function(){
+    $('.ModifyAdherentButton').click(function(){
         $('#ModalTitile').html('Modification d\'un adhérent');
         $('#formModalAdd').attr('action', $(this).attr('data-ref'));  
         $('#btnActionModal').html('Modifier');
+        
+        $.ajax({
+            url: $(this).attr('data-ref-ajax'),
+            type: 'post',
+            dataType: 'JSON',
+            data: {id: $(this).attr('data-id')},
+            success: function(result) {
+                if (result.Id) {
+                    $('#nom').val(result.Nom);
+                    $('#prenom').val(result.Prenom);
+                    $('#age').val(result.Age);
+                    $('#adresse').val(result.Adresse);
+                    $('#telephone').val(result.Telephone);
+                    $('#cotisation').val(result.Cotisation);
+                    $('#ville').val(result.Ville);
+                    $('#zipcode').val(result.CP);
+                }else{
+                    $.notify("Une erreur est survenue, contactez votre administrateur", 'error');
+                        console.log('Erreur de AJAX');
+                }
+            }
+        });
     });
 
     $('.SupprAdherent').click(function(){
         $('#formModalDelete').attr('action', $(this).attr('data-ref'));
     });
 
-    $.ajax({
-        url: $(this).attr('data-ref-ajax'),
-        type: 'post',
-        dataType: 'JSON',
-        data: {id: $(this).attr('data-id')},
-        success: function(result) {
-            if (result.id) {
-                $('nom').val(result.Nom);
-                $('prenom').val(result.Prenom);
-                $('age').val(result.Age);
-                $('adresse').val(result.Adresse);
-                $('tel').val(result.Telephone);
-                $('cotisation').val(result.Cotisation);
-                $('ville').val(result.Ville);
-                $('zipcode').val(result.CP);
-            }else{
-                $.notify("Une erreur est survenue, contactez votre administrateur", 'error');
-                    console.log('Erreur de AJAX');
-            }
-        }
-    })
+    
 
 </script>

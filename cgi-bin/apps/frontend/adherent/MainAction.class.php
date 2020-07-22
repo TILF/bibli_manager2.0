@@ -28,13 +28,13 @@
 
                 \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                     ->data('BBNageur\\adherents')->addAdherents(
-                        \Form::Param('nom'),
-                        \Form::Param('prenom'),
+                        \Db::encode(\Form::Param('nom')),
+                        \Db::encode(\Form::Param('prenom')),
                         \Form::Param('age'),
-                        \Form::Param('adresse'),
+                        \Db::encode(\Form::Param('adresse')),
                         \Form::Param('tel'),
-                        \Form::Param('cotisation'),
-                        \Form::Param('ville'),
+                        \Db::encode(\Form::Param('cotisation')),
+                        \Db::encode(\Form::Param('ville')),
                         \Form::Param('zipcode'));
                 \Form::addConfirmation('Ajout réalisé avec succès!');
                 \Form::displayResult(\Application::getRoute('adherent', 'index'));
@@ -51,13 +51,13 @@
 
                \Application::getDb(\config\Configuration::get('bbnageur_dsn' , 'databases'))
                 ->data('BBNageur\\adherents')->modifyAdherents($id,
-                        \Form::Param('Nom'),
-                        \Form::Param('Prenom'),
+                        \Db::encode(\Form::Param('Nom')),
+                        \Db::encode(\Form::Param('Prenom')),
                         \Form::Param('Age'),
-                        \Form::Param('Adresse'),
+                        \Db::encode(\Form::Param('Adresse')),
                         \Form::Param('Telephone'),
-                        \Form::Param('Cotisation'),
-                        \Form::Param('Ville'),
+                        \Db::encode(\Form::Param('Cotisation')),
+                        \Db::encode(\Form::Param('Ville')),
                         \Form::Param('CP'));
                 \Form::addConfirmation('Modification réalisée avec succès!');
                 \Form::displayResult(\Application::getRoute('adherent' , 'index'));
