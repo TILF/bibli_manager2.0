@@ -47,7 +47,7 @@
                 \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                     ->data('BBNageur\\livres')->ModifyBook(\Form::param('reference'), \Db::encode(\Form::param('titre')), \Db::encode(\Form::param('auteur')), \Form::param('emplacement'), \Form::param('etat'), \Db::encode(\Form::param('AppartenanceRadio')), \Form::param('annee'));
                 
-                \Form::addConfirmation('Modification réalisée avec succès');
+                \Form::addConfirmation($titre);
                 \Form::displayResult(\Application::getRoute('livre', 'index'));
             }else{
                 \Form::displayErrors(\Application::getRoute('livre', 'index'));

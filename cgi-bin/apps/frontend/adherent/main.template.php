@@ -93,7 +93,7 @@
                 </div>
                 <div class="form-group">
                     <label>Age</label>
-                    <input class="form-control verifyInt" data-name="Dat_naissance" name="age" id="age" type="number">
+                    <input class="form-control verifyInt" data-name="Age" name="age" id="age" type="number">
                 </div>
                 <div class="form-group">
                     <label>Adresse</label>
@@ -177,6 +177,7 @@
             data: {id: $(this).attr('data-id')},
             success: function(result) {
                 if (result.Id) {
+                    $('#id').val(result.Id);
                     $('#nom').val(result.Nom);
                     $('#prenom').val(result.Prenom);
                     $('#age').val(result.Age);
@@ -196,7 +197,5 @@
     $('.SupprAdherent').click(function(){
         $('#formModalDelete').attr('action', $(this).attr('data-ref'));
     });
-
-    
 
 </script>

@@ -22,7 +22,7 @@
 
         public static function addAdherents(){
 
-            self::getAdherentsDatas();
+            self::getAdherentsDatas(1);
 
             if (\Form::isValid()) {
 
@@ -85,7 +85,6 @@
          #################################################################################### */
 
         private static function getAdherentsDatas($type = null){
-
             \Form::addParams('nom', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('prenom', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('age', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
@@ -95,7 +94,8 @@
             \Form::addParams('ville', $_POST, \Form::TYPE_STRING, 1, 255);
             \Form::addParams('zipcode', $_POST, \Form::TYPE_INT, 0 , \Form::SIGNED_INT_32_MAX);
             
-            if( trim(\Form::param('nom')) === \Form::EMPTY_STRING || 
+            if(
+                trim(\Form::param('nom')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('prenom')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('age')) === \Form::EMPTY_STRING ||
                 trim(\Form::param('adresse')) === \Form::EMPTY_STRING || 
@@ -107,7 +107,9 @@
             }
             
             $exist = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                    ->data('BBNageur\\adherents')->getExistByNP(\Form::param('nom'), (\Form::param('prenom')));               
+                    ->data('BBNageur\\adherents')->getExistByNP(
+                        \Form::param('nom'),
+                        \Form::param('prenom'));        
             if(intval($exist) !== 0 && $type){
                 \Form::addError('Erreur Adhérent', 'Cet adhérent existe déjà !');
             }
@@ -131,7 +133,7 @@
                     $final['CP'] =  \Db::decode($datas['CP']);
                 die(\json_encode($final, true));
             }else{
-                die('Erreur lié au traitement');
+                die('Erreur liée au traitement');
                 }
         }
     }

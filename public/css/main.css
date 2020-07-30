@@ -26,13 +26,27 @@ div.dt-buttons{
 }
 
 .jumboAdherents{
-    background-image: url("../images/prout.jpg");
+    background-image: url("../images/adh.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    color: #fff;
+    color: #000;
 }
 
+.jumboIndex{
+    background-image: url("../images/accueil.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff
+}
+.jumboRes{
+    background-image: url("../images/res.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff
+}
 
 /* ############## GESTIONNAIRE DE FORMULAIRE ###################### */
 .has-error > *{
