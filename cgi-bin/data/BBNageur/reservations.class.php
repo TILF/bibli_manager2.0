@@ -19,12 +19,11 @@
 			$statement=$this->db->prepare(
 				'INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk)
 				VALUES (:date_d , :date_f , :id_livre , :id_adh)');
-			$statement->bindParam(':date_d', $date_d, \PDO::PARAM_INT);
-			$statement->bindParam(':date_f', $date_f, \PDO::PARAM_INT);
+			$statement->bindParam(':date_d', $date_d, \PDO::PARAM_STR);
+			$statement->bindParam(':date_f', $date_f, \PDO::PARAM_STR);
 			$statement->bindParam(':id_livre', $id_livre, \PDO::PARAM_INT);
 			$statement->bindParam(':id_adh', $id_adh, \PDO::PARAM_INT);
 			$statement->execute();
-			var_dump(':date_d');
 		}
 
 		public function getReservations()
@@ -77,12 +76,12 @@
 			$statement=$this->db->prepare(
 				'SELECT
 					Id_emprunt ,
-					DATE_FORMAT(Date_debut , "%d/%m/%Y"),
-					DATE_FORMAT(Date_fin , "%d/%m/%Y"),
+					Date_debut,
+					Date_fin,
 					Titre ,
 					Nom , 
 					Prenom ,
-					DATE_FORMAT(Date_rendu , "%d/%m/%Y"),
+					Date_rendu ,
 					Etat_actuel
 				FROM emprunts_livres
 				INNER JOIN livres
@@ -113,13 +112,10 @@
 		public function getExistByRefDate($id_livre, $date_f){ 
             $statement=$this->db->prepare(
                 'SELECT COUNT(*)
-                 FROM reservations
-                 INNER JOIN livres
-                 	ON reservations.Livres_fk = livres.Reference
-                 WHERE Reference = :Livres_fk
+                 FROM emprunts_livres
+                 WHERE Livres_fk = :id_livre
                  AND Date_fin IS NULL');
             $statement->bindParam(':id_livre', $id_livre, \PDO::PARAM_INT);
-            $statement->bindParam(':date_f', $date_f, \PDO::PARAM_INT);
             $statement->execute();
             return $statement->fetch(\PDO::FETCH_COLUMN);
         }

@@ -50,7 +50,7 @@
 				<td class="center">
 					<button class="btn btn-dark ModifyReservationsButton"
 							data-toggle ="modal"
-							data-target ="#addReservationsModale"
+							data-target ="#modifyReservationsModale"
 							data-ref ="<?php echo Application::getRoute('reservations', 'modifyReservations', array($Reservations['Id_emprunt']));?>"
                             data-ref-ajax = "<?php echo \Application::getRoute('reservations', 'getReservationsById');?>"
                             data-id ="<?php echo $Reservations['Id_emprunt'];?>"><i class="far fa-edit"></i>     
