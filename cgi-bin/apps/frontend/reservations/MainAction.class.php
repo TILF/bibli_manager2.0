@@ -86,39 +86,4 @@
                 \Form::addError('Erreur', 'Ce livre est déjà réservé !');
             }
         }
-
-
-
-         private static function getReservationsDatass($type = null){
-            \Form::addParams('date_d', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('date_f', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('reference', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
-            \Form::addParams('titre', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('nom', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('prenom', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('date_r', $_POST, \Form::TYPE_STRING, 1, 255);
-            \Form::addParams('etat', $_POST, \Form::TYPE_STRING, 1, 255);
-            
-            if(
-                trim(\Form::param('date_d')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('date_f')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('reference')) === \Form::EMPTY_STRING ||
-                trim(\Form::param('titre')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('nom')) === \Form::EMPTY_STRING || 
-                trim(\Form::param('prenom')) === \Form::EMPTY_STRING ||
-                trim(\Form::param('date_r')) === \Form::EMPTY_STRING ||
-                trim(\Form::param('etat')) === \Form::EMPTY_STRING) {
-                \Form::addError('Erreur Critique', 'Une erreur critique est survenue, merci de contacter votre administrateur');
-            }
-            
-            $exist = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                    ->data('BBNageur\\reservations')->getExistByRefDate(
-                        \Form::param('reference'),
-                        \Form::param('date_f'));        
-            if(intval($exist) !== 0 && $type){
-                \Form::addError('Erreur', 'Ce livre est déjà réservé !');
-            }
-        }
-    }
-
 ?>
