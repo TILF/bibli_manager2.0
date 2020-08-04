@@ -29,15 +29,16 @@
 		public function getReservations()
 		{
 			$statement=$this->db->prepare(
+
 				'SELECT
 					Id_emprunt ,
-					DATE_FORMAT(Date_debut , "%d/%m/%Y"),
-					DATE_FORMAT(Date_fin , "%d/%m/%Y"),
+					Date_debut ,
+					Date_fin ,
 					Reference ,
 					Titre ,
 					Nom ,
 					Prenom ,
-					DATE_FORMAT(Date_rendu , "%d/%m/%Y"),
+					Date_rendu ,
 					etat_actuel 
 				FROM emprunts_livres
 				INNER JOIN livres
@@ -100,10 +101,10 @@
 				'UPDATE emprunts_livres
 				INNER JOIN livres
 					ON emprunts_livres.Livres_fk = Livres.Reference
-				SET Date_rendu = DATE_FORMAT(:date_rendu, "%Y/%m/%d"),
+				SET Date_rendu = :date_r ,
 					Etat_actuel = :etat
 				WHERE Id_emprunt = :id_emprunt');
-			$statement->bindParam(':date_rendu', $date_r, \PDO::PARAM_INT);
+			$statement->bindParam(':date_rendu', $date_r, \PDO::PARAM_STR);
 			$statement->bindParam(':etat', $etat, \PDO::PARAM_STR);
 			$statement->bindParam(':id_emprunt', $id_emprunt, \PDO::PARAM_INT);
 			$statement->execute();
