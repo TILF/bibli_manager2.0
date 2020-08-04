@@ -86,4 +86,5 @@
                 \Form::addError('Erreur', 'Ce livre est déjà réservé !');
             }
         }
+    }
 ?>
