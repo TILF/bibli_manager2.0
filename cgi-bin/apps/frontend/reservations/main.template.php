@@ -162,8 +162,12 @@
         form_reset();
     });
 
-     $('.ModifyAdherentButton').click(function(){
+     $('.ModifyReservationsButton').click(function(){
         $('#formModalAdd').attr('action', $(this).attr('data-ref'));
+        $('#id_adh').prop('readonly', 'true');
+        $('#id_livre').prop('readonly', 'true');
+        $('#date_d').prop('readonly', 'true');
+        $('#date_f').prop('readonly', 'true');
     });
 
 </script>
