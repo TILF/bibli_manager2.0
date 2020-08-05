@@ -4,7 +4,7 @@
 
 	class reservations extends \data\Data
 	{
-		public function getReservationsbyId($id)
+		public function getReservationsbyId($id_emprunt)
 		{
 			$statement=$this->db->prepare(
 				'SELECT * FROM emprunts_livres
@@ -39,7 +39,7 @@
 					Nom ,
 					Prenom ,
 					Date_rendu ,
-					etat_actuel 
+					Etat_actuel 
 				FROM emprunts_livres
 				INNER JOIN livres
 					ON emprunts_livres.Livres_fk = Livres.reference

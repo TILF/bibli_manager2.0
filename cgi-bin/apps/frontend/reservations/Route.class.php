@@ -30,11 +30,11 @@
                         'controller' => 'MainAction::getHistorique'
                 ),
 
-                'modifyReservation' => array(
+                'modifyReservations' => array(
                         'pattern' => 'modifyReservations{id_emprunt}',
-                        'controller' => 'MainAction::modifyReservation'
+                        'controller' => 'MainAction::modifyReservations'
                 ),
             );
 	}
-
+    
 ?>

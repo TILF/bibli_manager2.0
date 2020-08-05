@@ -51,7 +51,6 @@
 				<th>Prénom</th>
 				<th>Rendu le</th>
 				<th>Etat actuel</th>
-				<th>Mettre à jour</th>
 			</tr>
 		</thead>
 

@@ -49,8 +49,8 @@
 				<td><?php echo \Db::decode($Reservations['Etat_actuel']);?></td>
 				<td class="center">
 					<button class="btn btn-dark ModifyReservationsButton"
-							data-toggle ="modal"
-							data-target ="#modifyReservationsModale"
+				    		data-toggle ="modal"
+							data-target ="#ModifyReservationsModale"
 							data-ref ="<?php echo Application::getRoute('reservations', 'modifyReservations', array($Reservations['Id_emprunt']));?>"
                             data-ref-ajax = "<?php echo \Application::getRoute('reservations', 'getReservationsById');?>"
                             data-id ="<?php echo $Reservations['Id_emprunt'];?>"><i class="far fa-edit"></i>     
@@ -64,7 +64,7 @@
 
 <!----------------------------Partie Modale -------------------------------------------------------->
 <form id="formModalAdd" action="" method="POST">
-	<div class="modal fade" id="addResModale" tabindex="-1" role="dialog" aria-labelledby="addReservations" aria-hidden="true">
+	<div class="modal fade" id="addResModale" tabindex="-1" role="dialog" aria-labelledby="addReservation" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +101,7 @@
 </form>
 
 <form id="formModalModify" action="" method="POST">
-	<div class="modal fade" id="modifyReservationsModale" tabindex="-1" role="dialog" aria-labelledby="modifyReservations" aria-hidden="true">
+	<div class="modal fade" id="ModifyReservationsModale" tabindex="-1" role="dialog" aria-labelledby="modifyReservations" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -163,7 +163,7 @@
     });
 
      $('.ModifyReservationsButton').click(function(){
-        $('#formModalAdd').attr('action', $(this).attr('data-ref'));
+        $('#formModalModify').attr('action', $(this).attr('data-ref'));
         $('#id_adh').prop('readonly', 'true');
         $('#id_livre').prop('readonly', 'true');
         $('#date_d').prop('readonly', 'true');
