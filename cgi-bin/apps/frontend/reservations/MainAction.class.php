@@ -25,10 +25,7 @@
          #################################################################################### */
 
         public static function addReservation(){
-
-
-            self::getReservationsDatas(1);
-
+            self::getReservationsDatas();
             if (\Form::isValid()) {
                 \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                         ->data('BBNageur\\reservations')->addReservation(
@@ -58,6 +55,10 @@
             }else{
                 \Form::displayErrors(\Application::getRoute('reservations' , 'index'));
             }
+        }
+        
+        public static function getReservationsById(){
+            //TODO
         }
 
 

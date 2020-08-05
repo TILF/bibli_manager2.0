@@ -1,5 +1,6 @@
-<?php $allReservations = \Page::get('allReservations');
-	  $allHistorique = \Page::get('allHistorique'); ?>
+<?php $allReservations = \Page::get('allReservations') ? \Page::get('allReservations') : array();
+	  $allHistorique = \Page::get('allHistorique') ? \Page::get('allHistorique') : array(); 
+?>
 
 <div class="container">
 	<!------------Entête--------------------->
@@ -10,15 +11,14 @@
 	
 
 <div class="row">
-	<div class="col-12 btn-left-bloc">
-		<button class="btn buttonAddExtend" data-toggle="modal" data-target ="#addResModale"
-				data-ref ="<?php echo \Application::getRoute('reservations' , 'addReservation')?>">
-			<span class="circle">
+    <div class="col-12 btn-left-bloc">
+	<button class="btn buttonAddExtend" data-toggle="modal" data-target="#addResModale" data-ref ="<?php echo \Application::getRoute('reservations' , 'addReservation')?>">
+	    <span class="circle">
                <span class="icon arrow"></span>
             </span>
-               <span class="button-text">Réservation</span>
-		</button>
-</div>
+            <span class="button-text">Réservation</span>
+        </button>
+    </div>
 
 <!---------------------Affichage datatable-------------------------------->
 	<table class="table table-striped table-bordered" id="ReservationsTable">
@@ -37,7 +37,7 @@
 		</thead>
 
 		<tbody>
-			<?php foreach($allReservations as $Reservations):?>
+		    <?php foreach($allReservations as $Reservations):?>
 			<tr>
 				<td><?php echo \Db::decode($Reservations['Date_debut']); ?></td>
 				<td><?php echo \Db::decode($Reservations['Date_fin']);?></td>
@@ -48,16 +48,10 @@
 				<td><?php echo \Db::decode($Reservations['Date_rendu']);?></td>
 				<td><?php echo \Db::decode($Reservations['Etat_actuel']);?></td>
 				<td class="center">
-					<button class="btn btn-dark ModifyReservationsButton"
-				    		data-toggle ="modal"
-							data-target ="#ModifyReservationsModale"
-							data-ref ="<?php echo Application::getRoute('reservations', 'modifyReservations', array($Reservations['Id_emprunt']));?>"
-                            data-ref-ajax = "<?php echo \Application::getRoute('reservations', 'getReservationsById');?>"
-                            data-id ="<?php echo $Reservations['Id_emprunt'];?>"><i class="far fa-edit"></i>     
-					</button>
+                                        data-toggle ="modal"
 				</td>
 			</tr>
-		<?php endforeach; ?>
+                    <?php endforeach; ?>
 		</tbody>
 	</table>
 </div>
@@ -149,7 +143,7 @@
 <!-------------------Partie Scripts ----------------------------------------------->
 <script>
 
-	 var table =  $('#ReservationsTable').DataTable({
+    var table =  $('#ReservationsTable').DataTable({
         dom: 'Bfrtip',
         responsive: true,
         pageLength: 25,
@@ -157,17 +151,12 @@
         buttons: [ {extend: 'excel', text: '<i class="fas fa-download"></i> Excel', className: 'btn btn-info'} ]
     });
 
-	$('.buttonAddExtend').click(function(){
+    $('.buttonAddExtend').click(function(){
         $('#formModalAdd').attr('action', $(this).attr('data-ref'));
-        form_reset();
+        //form_reset();
     });
 
-     $('.ModifyReservationsButton').click(function(){
-        $('#formModalModify').attr('action', $(this).attr('data-ref'));
-        $('#id_adh').prop('readonly', 'true');
-        $('#id_livre').prop('readonly', 'true');
-        $('#date_d').prop('readonly', 'true');
-        $('#date_f').prop('readonly', 'true');
+    $('.ModifyAdherentButton').click(function(){
     });
 
 </script>

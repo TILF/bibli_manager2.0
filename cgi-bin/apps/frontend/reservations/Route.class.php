@@ -15,9 +15,9 @@
                         'controller' => 'MainAction::addReservation'
                 ),
 
-                'getReservationsbyId' => array(
-                        'pattern' => 'getReservationsbyId',
-                        'controller' => 'MainAction::getReservationsbyId'
+                'getReservationsById' => array(
+                        'pattern' => 'getReservationsById',
+                        'controller' => 'MainAction::getReservationsById'
                 ),
 
                 'getReservations' => array(
@@ -30,9 +30,7 @@
                         'controller' => 'MainAction::getHistorique'
                 ),
 
-                'modifyReservations' => array(
-                        'pattern' => 'modifyReservations{id_emprunt}',
-                        'controller' => 'MainAction::modifyReservations'
+                        'pattern' => 'modifyReservations-{id_emprunt}',
                 ),
             );
 	}
