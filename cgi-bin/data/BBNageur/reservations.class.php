@@ -38,13 +38,11 @@
 
 				'SELECT
 					Id_emprunt ,
-					Date_debut ,
-					Date_fin ,
+					DATE_FORMAT(Date_fin , "%d/%m/%Y") as Date_fin,
 					Reference ,
 					Titre ,
 					Nom ,
 					Prenom ,
-					Date_rendu ,
 					Etat_actuel 
 				FROM emprunts_livres
 				INNER JOIN livres

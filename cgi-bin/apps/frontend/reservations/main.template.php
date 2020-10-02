@@ -1,5 +1,6 @@
-<?php $allReservations = \Page::get('allReservations');
-	  $allHistorique = \Page::get('allHistorique'); ?>
+<?php $allReservations = \Page::get('allReservations') ? \Page::get('allReservations') : array();
+	  $allHistorique = \Page::get('allHistorique') ? \Page::get('allHistorique') : array(); 
+?>
 
 <div class="container">
 	<!------------Entête--------------------->
@@ -10,15 +11,14 @@
 	
 
 <div class="row">
-	<div class="col-12 btn-left-bloc">
-		<button class="btn buttonAddExtend" data-toggle="modal" data-target ="#addResModale"
-				data-ref ="<?php echo \Application::getRoute('reservations' , 'addReservation')?>">
-			<span class="circle">
+    <div class="col-12 btn-left-bloc">
+	<button class="btn buttonAddExtend" data-toggle="modal" data-target="#addResModale" data-ref ="<?php echo \Application::getRoute('reservations' , 'addReservation')?>">
+	    <span class="circle">
                <span class="icon arrow"></span>
             </span>
-               <span class="button-text">Réservation</span>
-		</button>
-</div>
+            <span class="button-text">Réservation</span>
+        </button>
+    </div>
 
 <!---------------------Affichage datatable-------------------------------->
 	<table class="table table-striped table-bordered" id="ReservationsTable">
@@ -37,7 +37,7 @@
 		</thead>
 
 		<tbody>
-			<?php foreach($allReservations as $Reservations):?>
+		    <?php foreach($allReservations as $Reservations):?>
 			<tr>
 				<td><?php echo \Date::dbDateToString(($Reservations['Date_debut'])); ?></td>
 				<td><?php echo \Date::dbDateToString(($Reservations['Date_fin']));?></td>
@@ -57,7 +57,7 @@
 					</button>
 				</td>
 			</tr>
-		<?php endforeach; ?>
+                    <?php endforeach; ?>
 		</tbody>
 	</table>
 </div>
@@ -154,7 +154,7 @@
 
 <script>
 
-	 var table =  $('#ReservationsTable').DataTable({
+    var table =  $('#ReservationsTable').DataTable({
         dom: 'Bfrtip',
         responsive: true,
         pageLength: 25,
@@ -168,7 +168,7 @@
 
 	$('.buttonAddExtend').click(function(){
         $('#formModalAdd').attr('action', $(this).attr('data-ref'));
-        form_reset();
+        //form_reset();
     });
 
      $('.ModifyReservationsButton').click(function(){
