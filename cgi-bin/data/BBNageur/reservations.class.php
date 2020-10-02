@@ -7,10 +7,16 @@
 		public function getReservationsbyId($id_emprunt)
 		{
 			$statement=$this->db->prepare(
-				'SELECT * FROM emprunts_livres
-				WHERE Id_emprunt = :id_emprunt');
+				'SELECT Titre, Nom, Prenom, Date_debut, Date_fin, Date_rendu FROM emprunts_livres
+				INNER JOIN livres
+					ON emprunts_livres.Livres_fk = Livres.reference
+				INNER JOIN adherents
+					ON emprunts_livres.Adherents_fk = adherents.Id
+				WHERE Id_emprunt = :id_emprunt
+				');
 			$statement->bindParam(':id_emprunt', $id_emprunt, \PDO::PARAM_INT);
 			$statement->execute();
+			
 			return $statement->fetchAll(\PDO::FETCH_ASSOC);
 		}
 
@@ -61,7 +67,9 @@
 					Reference ,
 					Titre ,
 					Prenom ,
-					Nom 
+					Nom ,
+					Date_rendu ,
+					Etat_actuel
 				FROM emprunts_livres
 					INNER JOIN livres
 						ON emprunts_livres.Livres_fk = Livres.Reference
@@ -119,6 +127,26 @@
             $statement->bindParam(':id_livre', $id_livre, \PDO::PARAM_INT);
             $statement->execute();
             return $statement->fetch(\PDO::FETCH_COLUMN);
-        }
+		}
+		
+		public function getAdhInfos($pattern)
+		{
+			$statement=$this->db->prepare(
+                "SELECT id
+                 FROM adherents
+                 WHERE nom, prenom LIKE '%$pattern%'");
+            $statement->execute();
+            return $statement->fetch(\PDO::FETCH_COLUMN);	
+		}
+
+		public function getBooksInfos($pattern)
+		{
+			$statement=$this->db->prepare(
+                "SELECT id
+                 FROM livres
+                 WHERE titre LIKE '%$pattern%'");
+            $statement->execute();
+            return $statement->fetch(\PDO::FETCH_COLUMN);		
+		}
 	}
  ?>

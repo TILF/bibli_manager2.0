@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-12 btn-left-bloc">
 			<button class="btn buttonAddExtend" data-toggle="modal" data-target ="#addAdherentsModale"
-			data-ref ="<?php echo \Application::getRoute('adherent' , 'addAdherents')?>">
+			data-ref ="<?php echo \Application::getRoute('adherent' , 'addAdherents');?>">
 				<span class="circle">
                     <span class="icon arrow"></span>
                 </span>
@@ -43,7 +43,7 @@
 				<td><?php echo \Db::decode($Adherents['Prenom']);?></td>
 				<td><?php echo \Db::decode($Adherents['Age']);?></td>
 				<td><?php echo \Db::decode($Adherents['Adresse']);?></td>
-				<td><?php echo \Db::decode($Adherents['Telephone']);?></td>
+				<td>+33<?php echo \Db::decode($Adherents['Telephone']);?></td>
 				<td><?php echo \Db::decode($Adherents['Cotisation']);?></td>
 				<td><?php echo \Db::decode($Adherents['Ville']);?></td>
 				<td><?php echo \Db::decode($Adherents['CP']);?></td>

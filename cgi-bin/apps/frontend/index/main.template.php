@@ -26,8 +26,8 @@
 		<tbody>
 			<?php foreach($allReservationsRetard as $ReservationsR):?>
 			<tr>
-				<td><?php echo \Db::decode($ReservationsR['Date_debut']); ?></td>
-				<td><?php echo \Db::decode($ReservationsR['Date_fin']);?></td>
+				<td><?php echo \Date::dbDateToString($ReservationsR['Date_debut']); ?></td>
+				<td><?php echo \Date::dbDateToString($ReservationsR['Date_fin']);?></td>
 				<td><?php echo \Db::decode($ReservationsR['Reference']);?></td>
 				<td><?php echo \Db::decode($ReservationsR['Titre']);?></td>
 				<td><?php echo \Db::decode($ReservationsR['Nom']);?></td>
@@ -57,13 +57,13 @@
 		<tbody>
 			<?php foreach($allReservationsCourantes as $ReservationsC):?>
 			<tr>
-				<td><?php echo \Db::decode($ReservationsC['Date_debut']); ?></td>
-				<td><?php echo \Db::decode($ReservationsC['Date_fin']);?></td>
+				<td><?php echo \Date::dbDateToString($ReservationsC['Date_debut']); ?></td>
+				<td><?php echo \Date::dbDateToString($ReservationsC['Date_fin']);?></td>
 				<td><?php echo \Db::decode($ReservationsC['Reference']);?></td>
 				<td><?php echo \Db::decode($ReservationsC['Titre']);?></td>
 				<td><?php echo \Db::decode($ReservationsC['Nom']);?></td>
 				<td><?php echo \Db::decode($ReservationsC['Prenom']);?></td>
-				<td><?php echo \Db::decode($ReservationsC['Date_rendu']);?></td>
+				<td><?php echo \Date::dbDateToString($ReservationsC['Date_rendu']);?></td>
 				<td><?php echo \Db::decode($ReservationsC['Etat_actuel']);?></td>
 			</tr>
 		<?php endforeach; ?>
