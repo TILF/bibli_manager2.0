@@ -14,7 +14,7 @@
 				<span class="circle">
                     <span class="icon arrow"></span>
                 </span>
-                <span class="button-text">Ajouter un adhérent</span>
+                <span class="button-text">Nouvel adhérent</span>
 			</button>
 		</div>
 	</div>
@@ -147,6 +147,8 @@
       </div>
     </div>
 </form>
+
+
 
 <script>
 

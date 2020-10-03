@@ -8,9 +8,11 @@
             <link rel="icon" type="image/png" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>/favicon.png">
             <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>fontawesome-5.13.0/css/all.css">
             <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>bootstrap-4.4.1/css/bootstrap.min.css">
-            <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>css/datatables.min.css">
             <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>bootstrap-4.4.1/css/bootstrap-select.min.css">
+            <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>css/datatables.min.css">
+            <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>css/datepicker.css"> 
             <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dir']; ?>css/main.css">
+            
             <?php if(LOGIN_INTERFACE) : ?>
                 <link rel="stylesheet" type="text/css" href="<?php echo \config\Configuration::$vars['application']['dir']; ?>css/login.css">
             <?php endif; ?>
@@ -61,8 +63,10 @@
         <script src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>js/popper.min.js"></script>
         <script src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>bootstrap-4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>js/datatables.min.js"></script>
+        <script type="text/javascript" src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>js/bootstrap-datepicker.js"></script>
+        
         <script type="text/javascript" src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>js/formHandler.js"></script>
-
+        <script type="text/javascript" src="<?php echo \config\Configuration::$vars['application']['dirLib']; ?>bootstrap-4.4.1/js/bootstrap-select.min.js"></script>
         <div id="contentPage">
                 <?php require $template; ?>
         </div>

@@ -12,11 +12,19 @@
             $allReservations = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
                             ->data('BBNageur\\reservations')->getReservations();
 
-            $allHistorique = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                            ->data('BBNageur\\reservations')->getHistorique();
+            // $allHistorique = \Application::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
+            //                 ->data('BBNageur\\reservations')->getHistorique();
+            
+            $allAdh = \APplication::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
+                ->data('BBNageur\\adherents')->getAllAdherents();
 
+            $allBooks = \APplication::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
+                ->data('BBNageur\\livres')->getAllLivres();
+
+            \Page::set('allAdh', $allAdh);
+            \Page::set('allBooks', $allBooks);
             \Page::set('allReservations', $allReservations);
-            \Page::set('allHistorique', $allHistorique);
+            // \Page::set('allHistorique', $allHistorique);
             \Page::display();
         }
 
@@ -73,20 +81,12 @@
             }
         }
         
-        public static function getReservationsById(){
-            //TODO
-        }
 
-
-        /* ##################################################################################
-         *                FONCTIONS DE RECUPERATION ET MANIPULATION DES DONNEES
-         #################################################################################### */
-         private static function getReservationsDatas($type = null){
-            \Form::addParams('date_d', $_POST, \Form::TYPE_STRING, 1, 8);
-            \Form::addParams('date_f', $_POST, \Form::TYPE_STRING, 1, 8);
+        private static function getReservationsDatas($type = null){
+            \Form::addParams('date_d', $_POST, \Form::TYPE_STRING, 1, 10);
+            \Form::addParams('date_f', $_POST, \Form::TYPE_STRING, 1, 10);
             \Form::addParams('id_adh', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
             \Form::addParams('id_livre', $_POST, \Form::TYPE_INT, 0, \Form::SIGNED_INT_32_MAX);
-            
             if(
                 trim(\Form::param('date_d')) === \Form::EMPTY_STRING || 
                 trim(\Form::param('date_f')) === \Form::EMPTY_STRING || 
@@ -103,33 +103,6 @@
                 \Form::addError('Erreur', 'Ce livre est déjà réservé !');
             }
         }
-
-        public static function AjaxAdh()
-        {
-            \Form::addParams('pattern', $_POST, \Form::TYPE_STRING, 0 , 5000);
-
-            $tableInfos=\APplication::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                ->data('BBNageur\\reservations')->getAdhInfos('pattern');
-            $res=array();
-            foreach($tableInfos as $line)
-            {
-                $res[]=$line;
-            }
-        }
-
-        public static function AJaxBook()
-        {
-            \Form::addParams('pattern', $_POST, \Form::TYPE_STRING, 0 , 5000);
-
-            $tableInfos=\APplication::getDb(\config\Configuration::get('bbnageur_dsn', 'databases'))
-                ->data('BBNageur\\reservations')->getBooksInfos('pattern');
-            $res=array();
-            foreach($tableInfos as $line)
-            {
-                $res[]=$line('Titre');
-            }
-
-            die(json_encode((array_column($tableInfos, 'Titre'))));
-        }
+        
     }
 ?>

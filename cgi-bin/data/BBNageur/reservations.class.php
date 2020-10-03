@@ -20,7 +20,7 @@
 			return $statement->fetchAll(\PDO::FETCH_ASSOC);
 		}
 
-		public function addReservation($date_d , $date_f , $id_livre , $id_adh)
+		public function addReservation($date_d , $date_f  , $id_adh, $id_livre)
 		{
 			$statement=$this->db->prepare(
 				'INSERT INTO emprunts_livres (Date_debut , Date_fin , Livres_fk , Adherents_fk)
@@ -38,16 +38,18 @@
 
 				'SELECT
 					Id_emprunt ,
-					DATE_FORMAT(Date_fin , "%d/%m/%Y") as Date_fin,
+					Date_Debut,
+					Date_fin,
+					Date_Rendu,
 					Reference ,
 					Titre ,
 					Nom ,
 					Prenom ,
 					Etat_actuel 
 				FROM emprunts_livres
-				INNER JOIN livres
+				LEFT OUTER JOIN livres
 					ON emprunts_livres.Livres_fk = Livres.reference
-				INNER JOIN adherents
+				LEFT OUTER JOIN adherents
 					ON emprunts_livres.Adherents_fk = adherents.Id
 	 			WHERE Date_rendu IS NULL
 	 			ORDER BY Date_debut');
@@ -127,24 +129,5 @@
             return $statement->fetch(\PDO::FETCH_COLUMN);
 		}
 		
-		public function getAdhInfos($pattern)
-		{
-			$statement=$this->db->prepare(
-                "SELECT id
-                 FROM adherents
-                 WHERE nom, prenom LIKE '%$pattern%'");
-            $statement->execute();
-            return $statement->fetch(\PDO::FETCH_COLUMN);	
-		}
-
-		public function getBooksInfos($pattern)
-		{
-			$statement=$this->db->prepare(
-                "SELECT id
-                 FROM livres
-                 WHERE titre LIKE '%$pattern%'");
-            $statement->execute();
-            return $statement->fetch(\PDO::FETCH_COLUMN);		
-		}
 	}
  ?>

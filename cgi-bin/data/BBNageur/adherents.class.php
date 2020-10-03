@@ -8,7 +8,8 @@
         {
             $statement = $this->db->prepare(
                     'SELECT * 
-                    FROM adherents'
+                    FROM adherents
+                    WHERE dateFin IS NULL'
                     );
             $statement->execute();
             return $statement->fetchAll(\PDO::FETCH_ASSOC);
